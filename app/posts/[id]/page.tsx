@@ -1,17 +1,4 @@
-type Post = {
-  id: string
-  userId: string
-  title: string
-  body: string
-}
-
-type Comment = {
-  id: string
-  postId: string
-  name: string
-  email: string
-  body: string
-}
+import { getPost, getPostComments } from '@/api/post';
 
 type Props = {
   params: {
@@ -20,10 +7,10 @@ type Props = {
 }
 
 export default async function Post(props: Props) {
-  const postId = props.params.id
+  const postId = props.params.id;
 
-  const post = await getPost(postId)
-  const comments = await getComments(postId)
+  const post = await getPost(postId);
+  const comments = await getPostComments(postId);
 
   return (
     <div>
@@ -53,17 +40,5 @@ export default async function Post(props: Props) {
         </div>
       )}
     </div>
-  )
-}
-
-async function getPost(postId: string) {
-  const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
-  const post: Post = await response.json()
-  return post
-}
-
-async function getComments(postId: string) {
-  const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`)
-  const comments: Comment[] = await response.json()
-  return comments
+  );
 }

@@ -1,15 +1,8 @@
-import Link from 'next/link'
-
-type Post = {
-  id: string
-  userId: string
-  title: string
-  body: string
-}
+import Link from 'next/link';
+import { getPosts } from '@/api/post';
 
 export default async function Posts() {
-  const postsResponse = await fetch('https://jsonplaceholder.typicode.com/posts')
-  const posts: Post[] = await postsResponse.json()
+  const posts = await getPosts();
 
   return (
     <div className="grid grid-cols-1 gap-y-8">
@@ -34,5 +27,5 @@ export default async function Posts() {
         </div>
       ))}
     </div>
-  )
+  );
 }

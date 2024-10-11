@@ -1,13 +1,14 @@
-'use client'
+'use client';
 
-import { useActionState } from 'react'
-import login from '@/actions/login'
+import { useActionState } from 'react';
+import login from '@/actions/login';
 
 export default function Login() {
   const [state, dispatch, isPending] = useActionState(login, {
     errors: [],
     message: '',
-  })
+    name: ''
+  });
 
   return (
     <form action={dispatch}>
@@ -43,5 +44,5 @@ export default function Login() {
         {isPending ? 'LOGGING IN...' : 'LOGIN'}
       </button>
     </form>
-  )
+  );
 }
